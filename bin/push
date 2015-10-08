@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+'use strict';
+
+process.bin = process.title = 'push';
+
+var PushClient = require('../lib/client');
+
+console.log(process.env.PUSH_SALT);
+console.log(process.env.PUSH_KEY);
+console.log(process.env.PUSH_SECRET);
+console.log(process.env.PUSH_APP_ID);
+
+var pushClient = new PushClient({
+    appId: process.env.PUSH_APP_ID,
+    salt: process.env.PUSH_SALT,
+    key: process.env.PUSH_KEY,
+    secret: process.env.PUSH_SECRET
+});
+
+pushClient.sendToUser(12345, 'test', {test:true});

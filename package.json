@@ -1,0 +1,26 @@
+{
+  "name": "push-client",
+  "version": "0.1.0",
+  "description": "End user push client",
+  "author": "Garth",
+  "bin": {
+    "module-name": "./bin/push"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test"
+  },
+  "main": "lib/client.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/searchdoppler/node-push-client"
+  },
+  "dependencies": {
+    "bluebird": "^2.10.2",
+    "pusher": "^1.0.6"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3"
+  },
+  "private": true
+}
