@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "bluebird": "^2.10.2",
-    "pusher": "^1.0.6"
+    "pusher": "^1.0.6",
+    "yargs": "^3.27.0"
   },
   "devDependencies": {
     "chai": "^3.3.0",

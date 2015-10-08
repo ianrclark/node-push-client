@@ -3,12 +3,30 @@
 
 process.bin = process.title = 'push';
 
-var PushClient = require('../lib/client');
+var PushClient = require('../lib/client'),
+    argv = require('yargs')
+        .option('u', {
+          alias: 'user',
+          demand: true,
+          describe: 'UserID to send to'})
+        .option('e', {
+          alias: 'event',
+          demand: true,
+          describe: 'EventName to send'})
+        .option('u', {
+          alias: 'user',
+          demand: true,
+          describe: 'UserID to send to'})
+        .demand(1)
+        .argv;
 
-console.log(process.env.PUSH_SALT);
-console.log(process.env.PUSH_KEY);
-console.log(process.env.PUSH_SECRET);
-console.log(process.env.PUSH_APP_ID);
+if (!process.env.PUSH_APP_ID ||
+    !process.env.PUSH_KEY ||
+    !process.env.PUSH_SALT ||
+    !process.env.PUSH_SECRET) {
+    console.log("Environment is not setup correctly, please set PUSH_APP_ID, PUSH_KEY, PUSH_SALT, PUSH_SECRET");
+    process.exit(2);
+}
 
 var pushClient = new PushClient({
     appId: process.env.PUSH_APP_ID,
@@ -17,4 +35,7 @@ var pushClient = new PushClient({
     secret: process.env.PUSH_SECRET
 });
 
-pushClient.sendToUser(12345, 'test', {test:true});
+pushClient.sendToUser(String(argv.u), String(argv.e), String(argv._[0]))
+    .catch(function(error){
+        console.log(error);
+    });
